@@ -1,7 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {LoginComponent} from "./login/login.component";
+import {HomeComponent} from "./home/home.component";
+import {RoomDetailComponent} from "./rooms/room-detail/room-detail.component";
+import {RoomsComponent} from "./rooms/rooms.component";
+import {EditRoomComponent} from "./rooms/edit-room/edit-room.component";
+import {AddRoomComponent} from "./rooms/add-room/add-room.component";
+import {AuthGuard} from "./auth/auth.guard";
+import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 
-const routes: Routes = [];
+
+const routes: Routes = [
+  {path : '',redirectTo: 'login' , pathMatch: 'full'},
+  {path : 'login', component: LoginComponent},
+  {path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'rooms', component: RoomsComponent , canActivate: [AuthGuard] },
+  { path: 'rooms/add', component: AddRoomComponent, canActivate: [AuthGuard] },
+  { path: 'rooms/:id', component: RoomDetailComponent, canActivate: [AuthGuard] },
+  { path: 'rooms/edit/:id', component: EditRoomComponent, canActivate: [AuthGuard] },
+  { path: 'page-not-found', component: PageNotFoundComponent },
+  { path: '**', redirectTo: '/page-not-found' }
+
+
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

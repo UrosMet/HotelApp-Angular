@@ -1,0 +1,43 @@
+
+<div class="container mt-5">
+  <h1 class="display-4">Dodaj Sobu</h1>
+  <form #roomForm="ngForm" (ngSubmit)="saveRoom()" *ngIf="!roomSaved">
+    <div class="mb-3">
+      <label for="brojKreveta" class="form-label">Broj kreveta</label>
+      <input type="number" class="form-control" id="brojKreveta" [(ngModel)]="room.brojKreveta" name="brojKreveta" required min="1">
+    </div>
+    <div class="mb-3">
+      <label for="tipKreveta" class="form-label">Tip kreveta</label>
+      <input type="text" class="form-control" id="tipKreveta" [(ngModel)]="room.tipKreveta" name="tipKreveta" required>
+    </div>
+    <div class="mb-3">
+      <label for="cenovnik" class="form-label">Cenovnik</label>
+      <select class="form-control" id="cenovnik" [(ngModel)]="room.cenovnik.id" name="cenovnik" required>
+        <option *ngFor="let cenovnik of cenovnici" [value]="cenovnik.id">
+          {{ cenovnik.cenaPoNoci }} USD
+        </option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="klima" class="form-label">Klima</label>
+      <select class="form-control" id="klima" [(ngModel)]="room.klima" name="klima" required>
+        <option [value]="true">Da</option>
+        <option [value]="false">Ne</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!roomForm.form.valid">Sačuvaj</button>
+    <br>
+  </form>
+
+  <div *ngIf="roomSaved">
+    <hr class="my-4">
+    <h2>Upload Slike</h2>
+    <input type="file" (change)="onFileSelected($event)" multiple class="form-control mb-3">
+    <button class="btn btn-success" (click)="uploadImages()">Upload</button>
+    <br>
+  </div>
+
+  <div *ngIf="alertMessage" class="alert alert-success" role="alert">
+    {{ alertMessage }}
+  </div>
+</div>

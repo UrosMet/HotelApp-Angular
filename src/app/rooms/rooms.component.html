@@ -1,0 +1,29 @@
+
+<div class="container mt-5">
+  <h1 class="display-4">Sobe</h1>
+  <p class="lead">Upravljajte sobama u hotelu.</p>
+  <hr class="my-4">
+
+  <div *ngIf="isAdmin" class="mb-3">
+    <a routerLink="/rooms/add" class="btn btn-primary">Dodaj sobu</a>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4" *ngFor="let room of rooms">
+      <div class="card mb-4">
+        <div *ngIf="roomImages[room.id] && roomImages[room.id].length > 0">
+          <img [src]="getImageUrl(roomImages[room.id][0])" class="card-img-top" alt="Room Image">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ room.tipKreveta }} Room</h5>
+          <a routerLink="/rooms/{{ room.id }}" class="btn btn-primary">Detalji</a>
+          <div *ngIf="isAdmin" class="mt-2">
+            <a routerLink="/rooms/edit/{{ room.id }}" class="btn btn-warning me-2">Izmeni</a>
+            <button class="btn btn-danger" (click)="deleteRoom(room.id)">Obriši</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

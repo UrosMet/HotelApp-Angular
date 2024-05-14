@@ -1,0 +1,34 @@
+
+<div class="container mt-5" *ngIf="room">
+  <h1 class="display-4">{{ room.tipKreveta }} Room</h1>
+  <p class="lead">Detalji sobe</p>
+  <hr class="my-4">
+
+  <div id="carouselRoomImages" class="carousel slide mb-4" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item" *ngFor="let image of images; let i = index" [ngClass]="{ 'active': i === 0 }">
+        <img [src]="getImageUrl(image)" class="d-block w-100 fixed-size-image" alt="Room Image">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselRoomImages" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselRoomImages" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      Detalji sobe
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ room.tipKreveta }} Room</h5>
+      <p class="card-text"><strong>Broj kreveta:</strong> {{ room.brojKreveta }}</p>
+      <p class="card-text"><strong>Cena po noći:</strong> {{ room.cenovnik.cenaPoNoci }} USD</p>
+      <p class="card-text"><strong>Klima:</strong> {{ room.klima ? 'Da' : 'Ne' }}</p>
+    </div>
+  </div>
+</div>

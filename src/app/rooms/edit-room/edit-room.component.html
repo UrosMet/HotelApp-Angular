@@ -1,0 +1,52 @@
+
+<div class="container mt-5" *ngIf="room">
+  <h1 class="display-4">Uredi Sobu</h1>
+  <form (ngSubmit)="saveRoomAndUploadImages()">
+    <div class="mb-3">
+      <label for="brojKreveta" class="form-label">Broj kreveta</label>
+      <input type="number" class="form-control" id="brojKreveta" [(ngModel)]="room.brojKreveta" name="brojKreveta" required>
+    </div>
+    <div class="mb-3">
+      <label for="tipKreveta" class="form-label">Tip kreveta</label>
+      <input type="text" class="form-control" id="tipKreveta" [(ngModel)]="room.tipKreveta" name="tipKreveta" required>
+    </div>
+    <div class="mb-3">
+      <label for="cenovnik" class="form-label">Cenovnik</label>
+      <select class="form-control" id="cenovnik" [(ngModel)]="room.cenovnik.id" name="cenovnik" required>
+        <option *ngFor="let cenovnik of cenovnici" [value]="cenovnik.id">
+          {{ cenovnik.cenaPoNoci }} USD
+        </option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="klima" class="form-label">Klima</label>
+      <select class="form-control" id="klima" [(ngModel)]="room.klima" name="klima" required>
+        <option [value]="true">Da</option>
+        <option [value]="false">Ne</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="images" class="form-label">Upload Slike</label>
+      <input type="file" (change)="onFileSelected($event)" multiple class="form-control mb-3">
+    </div>
+    <button type="submit" class="btn btn-primary">Sačuvaj</button>
+  </form>
+
+  <div class="mt-4">
+    <h2>Slike</h2>
+    <div class="row">
+      <div class="col-md-3" *ngFor="let image of images">
+        <div class="card mb-4">
+          <img [src]="getImageUrl(image)" class="card-img-top" alt="Room Image">
+          <div class="card-body text-center">
+            <button class="btn btn-danger btn-sm" (click)="deleteImage(image.id)">Obriši</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="alertMessage" class="alert alert-success" role="alert">
+    {{ alertMessage }}
+  </div>
+</div>

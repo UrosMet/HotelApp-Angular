@@ -1,0 +1,73 @@
+
+<div class="container mt-5">
+  <div class="jumbotron">
+    <h1 class="display-4">Dobrodošli u Hotel Aplikaciju!</h1>
+    <p class="lead">Ovo je vaša početna stranica.</p>
+    <hr class="my-4">
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img src="assets/images/rooms.png" class="card-img-top" alt="Rooms">
+            <div class="card-body">
+              <h5 class="card-title">Sobe</h5>
+              <p class="card-text">Upravljaj sobama u hotelu.</p>
+              <a routerLink="/rooms" class="btn btn-primary">Idi na sobe</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img src="assets/images/reservation.png" class="card-img-top" alt="Reservations">
+            <div class="card-body">
+              <h5 class="card-title">Rezervacije</h5>
+              <p class="card-text">Pregledaj i upravljaj rezervacijama.</p>
+              <a routerLink="/reservations" class="btn btn-primary">Idi na rezervacije</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img src="assets/images/guest.jpg" class="card-img-top" alt="Guests">
+            <div class="card-body">
+              <h5 class="card-title">Gosti</h5>
+              <p class="card-text">Upravljaj gostima hotela.</p>
+              <a routerLink="/guests" class="btn btn-primary">Idi na goste</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mt-4">
+          <div class="card" style="width: 18rem;">
+            <img src="assets/images/transport.jpg" class="card-img-top" alt="Transport">
+            <div class="card-body">
+              <h5 class="card-title">Transport</h5>
+              <p class="card-text">Pregledaj i upravljaj transportnim opcijama.</p>
+              <a routerLink="/transport" class="btn btn-primary">Idi na transport</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mt-4">
+          <div class="card" style="width: 18rem;">
+            <img src="assets/images/edituser.jpg" class="card-img-top" alt="Manage Profile">
+            <div class="card-body">
+              <h5 class="card-title">Upravljaj Profilom</h5>
+              <p class="card-text">Upravljaj svojim korisničkim profilom.</p>
+              <a routerLink="/profile" class="btn btn-primary">Idi na profil</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mt-4" *ngIf="isAdmin">
+          <div class="card" style="width: 18rem;">
+            <img src="assets/images/admin.png" class="card-img-top" alt="Admin Panel">
+            <div class="card-body">
+              <h5 class="card-title">Admin Panel</h5>
+              <p class="card-text">Pristupi administratorskim opcijama.</p>
+              <a routerLink="/admin-panel" class="btn btn-primary">Idi na Admin Panel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
