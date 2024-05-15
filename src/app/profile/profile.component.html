@@ -1,0 +1,39 @@
+<div class="container mt-5">
+  <h1 class="display-4">Upravljanje Profilom</h1>
+  <form (ngSubmit)="saveProfile()">
+    <div class="mb-3">
+      <label for="ime" class="form-label">Ime</label>
+      <input type="text" class="form-control" id="ime" [(ngModel)]="user.ime" name="ime" required>
+    </div>
+    <div class="mb-3">
+      <label for="prezime" class="form-label">Prezime</label>
+      <input type="text" class="form-control" id="prezime" [(ngModel)]="user.prezime" name="prezime" required>
+    </div>
+    <div class="mb-3">
+      <label for="korisnickoIme" class="form-label">Korisničko Ime</label>
+      <input type="text" class="form-control" id="korisnickoIme" [(ngModel)]="user.korisnickoIme" name="korisnickoIme" required>
+    </div>
+    <div class="mb-3">
+      <label for="newPassword" class="form-label">Nova Lozinka</label>
+      <input type="password" class="form-control" id="newPassword" [(ngModel)]="newPassword" name="newPassword">
+    </div>
+    <div class="mb-3">
+      <label for="confirmPassword" class="form-label">Potvrdi Novu Lozinku</label>
+      <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Profilna Slika</label>
+      <div *ngIf="user.profilnaSlika">
+        <img [src]="getProfileImageUrl()" alt="Profilna Slika" class="img-thumbnail" style="max-width: 200px;">
+        <button type="button" class="btn btn-danger mt-2" (click)="deleteProfileImage()">Obriši Profilnu Sliku</button>
+      </div>
+      <div *ngIf="!user.profilnaSlika">
+        <input type="file" class="form-control mt-2" (change)="onFileSelected($event)">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Sačuvaj</button>
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+      {{ errorMessage }}
+    </div>
+  </form>
+</div>

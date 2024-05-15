@@ -1,0 +1,8 @@
+.container {
+  max-width: 600px;
+}
+
+.img-thumbnail {
+  display: block;
+  margin-bottom: 10px;
+}

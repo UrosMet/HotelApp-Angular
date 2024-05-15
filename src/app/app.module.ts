@@ -16,6 +16,7 @@ import { EditRoomComponent } from './rooms/edit-room/edit-room.component';
 import { AddRoomComponent } from './rooms/add-room/add-room.component';
 import { FooterComponent } from './footer/footer.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     EditRoomComponent,
     AddRoomComponent,
     FooterComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

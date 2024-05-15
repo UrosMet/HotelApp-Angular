@@ -9,6 +9,7 @@ import {AddRoomComponent} from "./rooms/add-room/add-room.component";
 import {AuthGuard} from "./auth/auth.guard";
 import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 import {AdminGuard} from "./auth/admin.guard";
+import {ProfileComponent} from "./profile/profile.component";
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'rooms/add', component: AddRoomComponent, canActivate: [AuthGuard,AdminGuard] },
   { path: 'rooms/:id', component: RoomDetailComponent, canActivate: [AuthGuard] },
   { path: 'rooms/edit/:id', component: EditRoomComponent, canActivate: [AuthGuard,AdminGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'page-not-found', component: PageNotFoundComponent },
   { path: '**', redirectTo: '/page-not-found' }
 

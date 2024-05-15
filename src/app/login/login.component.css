@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.container-fluid {
+  height: 100%;
+  padding: 0 !important;
+}
+
+.row {
+  margin: 0 !important;
+  height: 100%;
+}

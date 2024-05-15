@@ -1,16 +1,22 @@
-footer {
-  margin-top: auto;
-  background-color: #f8f9fa;
-}
 
-footer .container {
-  padding: 1rem 0;
-}
-
-footer .text-center {
-  padding: 0.5rem 0;
-}
-
-footer p {
+html, body {
+  height: 100%;
   margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #9A616D;
+}
+
+.container-fluid {
+  height: 100%;
+}
+
+.row {
+  margin: 0 !important;
+  height: 100%;
 }
