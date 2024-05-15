@@ -1,0 +1,66 @@
+<div class="container mt-5">
+  <h1 class="display-4">Transport</h1>
+  <p class="lead">Lista svih transporta</p>
+  <hr class="my-4">
+
+  <div class="mb-3">
+    <input type="text" class="form-control" placeholder="Pretraga transporta..." [(ngModel)]="searchQuery" (input)="onSearch()">
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Vrsta Transporta</th>
+      <th>Gost</th>
+      <th>Vreme Narucivanja</th>
+      <th class="d-flex justify-content-center">Akcije</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let transport of filteredTransports">
+      <td>{{ transport.id }}</td>
+      <td>
+        <select class="form-control" [(ngModel)]="transport.vrstaTransporta">
+          <option value="Taxi">Taxi</option>
+          <option value="Rent a car">Rent-a-Car</option>
+          <option value="Limuzina">Limuzina</option>
+        </select>
+      </td>
+      <td>
+        <select class="form-control" [(ngModel)]="transport.idGosta.id">
+          <option *ngFor="let guest of guests" [value]="guest.id">
+            {{ guest.ime }} {{ guest.prezime }}
+          </option>
+        </select>
+      </td>
+      <td>{{ transport.vremeNarucivanja | date: 'dd.MM.yyyy HH:mm:ss' }}</td>
+      <td class="d-flex justify-content-center">
+        <button class="btn btn-primary" (click)="saveTransport(transport)">Sačuvaj</button>
+        <button class="btn btn-danger ms-2" (click)="deleteTransport(transport.id)">Obriši</button>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <select class="form-control" [(ngModel)]="newTransport.vrstaTransporta" required>
+          <option value="Taxi">Taxi</option>
+          <option value="Rent a car">Rent-a-Car</option>
+          <option value="Limuzina">Limuzina</option>
+        </select>
+      </td>
+      <td>
+        <select class="form-control" [(ngModel)]="newTransport.idGosta.id" required>
+          <option *ngFor="let guest of guests" [value]="guest.id">
+            {{ guest.ime }} {{ guest.prezime }}
+          </option>
+        </select>
+      </td>
+      <td>-</td>
+      <td class="d-flex justify-content-center">
+        <button class="btn btn-success" (click)="addTransport()" [disabled]="!isNewTransportValid()">Dodaj</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

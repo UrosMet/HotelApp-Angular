@@ -1,0 +1,93 @@
+<div class="container mt-5">
+  <h1 class="display-4">Admin Panel</h1>
+  <p class="lead">Upravljanje recepcionerima i statistika</p>
+  <hr class="my-4">
+
+  <ul class="nav nav-tabs" id="adminPanelTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="manage-receptionists-tab" data-bs-toggle="tab" data-bs-target="#manage-receptionists" type="button" role="tab" aria-controls="manage-receptionists" aria-selected="true">Upravljaj Recepcionerima</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="statistics-tab" data-bs-toggle="tab" data-bs-target="#statistics" type="button" role="tab" aria-controls="statistics" aria-selected="false">Statistika</button>
+    </li>
+  </ul>
+  <div class="tab-content" id="adminPanelTabsContent">
+    <div class="tab-pane fade show active" id="manage-receptionists" role="tabpanel" aria-labelledby="manage-receptionists-tab">
+      <h2 class="mt-4">Dodaj Novog Recepcionera</h2>
+      <form (ngSubmit)="addReceptionist()">
+        <div class="mb-3">
+          <label for="ime" class="form-label">Ime</label>
+          <input type="text" class="form-control" id="ime" [(ngModel)]="newReceptionist.ime" name="ime" required>
+        </div>
+        <div class="mb-3">
+          <label for="prezime" class="form-label">Prezime</label>
+          <input type="text" class="form-control" id="prezime" [(ngModel)]="newReceptionist.prezime" name="prezime" required>
+        </div>
+        <div class="mb-3">
+          <label for="korisnickoIme" class="form-label">Korisničko Ime</label>
+          <input type="text" class="form-control" id="korisnickoIme" [(ngModel)]="newReceptionist.korisnickoIme" name="korisnickoIme" required>
+        </div>
+        <div class="mb-3">
+          <label for="lozinka" class="form-label">Lozinka</label>
+          <input type="password" class="form-control" id="lozinka" [(ngModel)]="newReceptionist.lozinka" name="lozinka" required>
+        </div>
+        <button type="submit" class="btn btn-success" [disabled]="!isNewReceptionistValid()">Dodaj</button>
+      </form>
+      <h2 class="mt-4">Upravljaj Recepcionerima</h2>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Ime</th>
+          <th>Prezime</th>
+          <th>Korisničko Ime</th>
+          <th>Lozinka</th>
+          <th>Role</th>
+          <th>Profilna Slika</th>
+          <th>Akcije</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let receptionist of receptionists">
+          <td>{{ receptionist.id }}</td>
+          <td><input type="text" class="form-control" [(ngModel)]="receptionist.ime"></td>
+          <td><input type="text" class="form-control" [(ngModel)]="receptionist.prezime"></td>
+          <td><input type="text" class="form-control" [(ngModel)]="receptionist.korisnickoIme"></td>
+          <td><input type="password" class="form-control" [(ngModel)]="receptionist.lozinka"></td>
+          <td>
+            <select class="form-control" [(ngModel)]="receptionist.role">
+              <option value="USER">USER</option>
+              <option value="ADMIN">ADMIN</option>
+            </select>
+          </td>
+          <td>
+            <img [src]="getImageUrl(receptionist.profilnaSlika)" alt="Profilna Slika" class="img-thumbnail" width="100" *ngIf="receptionist.profilnaSlika !== 'default.png'">
+            <button class="btn btn-danger mt-2" (click)="deleteImage(receptionist)" *ngIf="receptionist.profilnaSlika !== 'default.png'">Obriši Sliku</button>
+            <input type="file" class="form-control mt-2" (change)="onFileSelected($event, receptionist.id)" *ngIf="receptionist.profilnaSlika === 'default.png'">
+          </td>
+          <td>
+            <button class="btn btn-primary" (click)="saveReceptionist(receptionist)">Sačuvaj</button>
+            <button class="btn btn-danger ms-2" (click)="deleteReceptionist(receptionist.id)">Obriši</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane fade" id="statistics" role="tabpanel" aria-labelledby="statistics-tab">
+      <h2 class="mt-4">Statistika</h2>
+      <div class="row mb-3">
+        <div class="col">
+          <input type="date" class="form-control" [(ngModel)]="startDate" placeholder="Početni datum">
+        </div>
+        <div class="col">
+          <input type="date" class="form-control" [(ngModel)]="endDate" placeholder="Krajnji datum">
+        </div>
+        <div class="col">
+          <button class="btn btn-primary" (click)="loadEarningsByDate()">Prikaži</button>
+        </div>
+      </div>
+      <p *ngIf="earnings !== null">Ukupna zarada hotela: {{ earnings | currency:'USD' }}</p>
+      <p *ngIf="earnings === null">Nema zarade za dat period.</p>
+    </div>
+    </div>
+  </div>

@@ -7,27 +7,28 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/rooms">Sobe</a>
+          <a class="nav-link ms-3" routerLink="/rooms"><fa-icon [icon]="faBed"></fa-icon></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/reservations">Rezervacije</a>
+          <a class="nav-link ms-3" routerLink="/reservations"><fa-icon [icon]="faCalendarCheck"></fa-icon></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/guests">Gosti</a>
+          <a class="nav-link ms-3" routerLink="/guests"><fa-icon [icon]="faUsers"></fa-icon></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/transport">Transport</a>
+          <a class="nav-link ms-3" routerLink="/transport"><fa-icon [icon]="faCar"></fa-icon></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/profile">Profil</a>
+          <a class="nav-link ms-3" routerLink="/profile"><fa-icon [icon]="faUser"></fa-icon></a>
         </li>
-        <li class="nav-item" *ngIf="isAdmin">
-          <a class="nav-link" routerLink="/admin-panel">Admin Panel</a>
-        </li>
+
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <button class="btn btn-outline-danger" (click)="logout()">Logout</button>
+        <li class="nav-item ms-3" *ngIf="isAdmin">
+          <a class="nav-link ms-3" routerLink="/admin-panel"><fa-icon [icon]="faTools"></fa-icon></a>
+        </li>
+        <li class="nav-item ms-3">
+          <button class="btn btn-outline-danger" (click)="logout()"><fa-icon [icon]="faSignOutAlt"></fa-icon></button>
         </li>
       </ul>
     </div>

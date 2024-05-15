@@ -17,6 +17,10 @@ import { AddRoomComponent } from './rooms/add-room/add-room.component';
 import { FooterComponent } from './footer/footer.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProfileComponent } from './profile/profile.component';
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import { GuestsComponent } from './guests/guests.component';
+import { TransportComponent } from './transport/transport.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -30,13 +34,17 @@ import { ProfileComponent } from './profile/profile.component';
     AddRoomComponent,
     FooterComponent,
     PageNotFoundComponent,
-    ProfileComponent
+    ProfileComponent,
+    GuestsComponent,
+    TransportComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
   providers: [
     AuthService,
