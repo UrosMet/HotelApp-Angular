@@ -21,6 +21,7 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import { GuestsComponent } from './guests/guests.component';
 import { TransportComponent } from './transport/transport.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { ReservationsComponent } from './reservations/reservations.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     ProfileComponent,
     GuestsComponent,
     TransportComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    ReservationsComponent
   ],
   imports: [
     BrowserModule,

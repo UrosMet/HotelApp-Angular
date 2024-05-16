@@ -13,6 +13,7 @@ import {ProfileComponent} from "./profile/profile.component";
 import {GuestsComponent} from "./guests/guests.component";
 import {TransportComponent} from "./transport/transport.component";
 import {AdminPanelComponent} from "./admin-panel/admin-panel.component";
+import {ReservationsComponent} from "./reservations/reservations.component";
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'guests', component: GuestsComponent, canActivate: [AuthGuard] },
   { path: 'transport', component: TransportComponent, canActivate: [AuthGuard] },
   { path: 'admin-panel', component: AdminPanelComponent, canActivate: [AuthGuard,AdminGuard] },
+  { path: 'reservations', component: ReservationsComponent, canActivate: [AuthGuard] },
   { path: 'page-not-found', component: PageNotFoundComponent },
   { path: '**', redirectTo: '/page-not-found' }
 

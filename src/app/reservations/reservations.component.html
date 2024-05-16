@@ -1,0 +1,79 @@
+<div class="container mt-5">
+  <h1 class="display-4">Rezervacije</h1>
+  <p class="lead">Lista svih rezervacija</p>
+  <hr class="my-4">
+
+  <div class="row mb-3">
+    <div class="col">
+      <select class="form-control" [(ngModel)]="selectedGuestId" (change)="filterByGuest()">
+        <option value="">Prikaži sve rezervacije po gostu</option>
+        <option *ngFor="let guest of guests" [value]="guest.id">
+          {{ guest.ime }} {{ guest.prezime }}
+        </option>
+      </select>
+    </div>
+    <div class="col">
+      <select class="form-control" [(ngModel)]="selectedRoomId" (change)="filterByRoom()">
+        <option value="">Prikaži sve rezervacije po sobi</option>
+        <option *ngFor="let room of rooms" [value]="room.id">
+          {{ room.tipKreveta }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Gost</th>
+      <th>Soba</th>
+      <th>Tip kreveta</th>
+      <th>Cena po noći</th>
+      <th>Recepcioner</th>
+      <th>Datum rezervacije</th>
+      <th>Duži boravka</th>
+      <th>Akcije</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let reservation of filteredReservations">
+      <td>{{ reservation.id }}</td>
+      <td>
+        <select class="form-control" [(ngModel)]="reservation.idGosta.id">
+          <option *ngFor="let guest of guests" [value]="guest.id">
+            {{ guest.ime }} {{ guest.prezime }}
+          </option>
+        </select>
+      </td>
+      <td>
+        <select class="form-control" [(ngModel)]="reservation.idSobe.id">
+          <option *ngFor="let room of rooms" [value]="room.id">
+            {{ room.tipKreveta }}
+          </option>
+        </select>
+      </td>
+      <td>{{ reservation.idSobe.tipKreveta }}</td>
+      <td>{{ reservation.idSobe.cenovnik.cenaPoNoci }} USD</td>
+      <td *ngIf="isAdmin">
+        <select class="form-control" [(ngModel)]="reservation.idRecepcioner.id">
+          <option *ngFor="let receptionist of receptionists" [value]="receptionist.id">
+            {{ receptionist.ime }} {{ receptionist.prezime }}
+          </option>
+        </select>
+      </td>
+      <td *ngIf="!isAdmin">{{ reservation.idRecepcioner.ime }} {{ reservation.idRecepcioner.prezime }}</td>
+      <td>
+        <input type="date" class="form-control" [(ngModel)]="reservation.datumRezervacije">
+      </td>
+      <td>
+        <input type="number" class="form-control" [(ngModel)]="reservation.duzinaBoravka">
+      </td>
+      <td class="d-flex justify-content-center">
+        <button class="btn btn-primary" (click)="saveReservation(reservation)">Sačuvaj</button>
+        <button class="btn btn-danger ms-2" (click)="deleteReservation(reservation.id)">Obriši</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -62,4 +62,8 @@ export class AuthService {
     return false;
   }
 
+  getReceptionistId() {
+    const payload = this.getTokenPayload();
+    return payload?.ID_Recepcionera;
+  }
 }
