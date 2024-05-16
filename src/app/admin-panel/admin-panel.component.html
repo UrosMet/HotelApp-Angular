@@ -1,11 +1,14 @@
 <div class="container mt-5">
   <h1 class="display-4">Admin Panel</h1>
-  <p class="lead">Upravljanje recepcionerima i statistika</p>
+  <p class="lead">Upravljanje recepcionerima, cenama i statistika</p>
   <hr class="my-4">
 
   <ul class="nav nav-tabs" id="adminPanelTabs" role="tablist">
     <li class="nav-item" role="presentation">
       <button class="nav-link active" id="manage-receptionists-tab" data-bs-toggle="tab" data-bs-target="#manage-receptionists" type="button" role="tab" aria-controls="manage-receptionists" aria-selected="true">Upravljaj Recepcionerima</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="manage-pricings-tab" data-bs-toggle="tab" data-bs-target="#manage-pricings" type="button" role="tab" aria-controls="manage-pricings" aria-selected="false">Upravljaj Cenama</button>
     </li>
     <li class="nav-item" role="presentation">
       <button class="nav-link" id="statistics-tab" data-bs-toggle="tab" data-bs-target="#statistics" type="button" role="tab" aria-controls="statistics" aria-selected="false">Statistika</button>
@@ -73,21 +76,55 @@
         </tbody>
       </table>
     </div>
+
+    <div class="tab-pane fade" id="manage-pricings" role="tabpanel" aria-labelledby="manage-pricings-tab">
+      <h2 class="mt-4">Upravljaj Cenama</h2>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Cena po noći (USD)</th>
+          <th>Akcije</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let pricing of pricings">
+          <td>{{ pricing.id }}</td>
+          <td><input type="number" class="form-control" [(ngModel)]="pricing.cenaPoNoci"></td>
+          <td>
+            <button class="btn btn-primary" (click)="savePricing(pricing)">Sačuvaj</button>
+            <button class="btn btn-danger ms-2" (click)="deletePricing(pricing.id)">Obriši</button>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><input type="number" class="form-control" [(ngModel)]="newPricing.cenaPoNoci" required></td>
+          <td>
+            <button class="btn btn-success" (click)="addPricing()" [disabled]="!isNewPricingValid()">Dodaj</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
     <div class="tab-pane fade" id="statistics" role="tabpanel" aria-labelledby="statistics-tab">
       <h2 class="mt-4">Statistika</h2>
       <div class="row mb-3">
-        <div class="col">
+        <div class="col-md-4">
           <input type="date" class="form-control" [(ngModel)]="startDate" placeholder="Početni datum">
         </div>
-        <div class="col">
+        <div class="col-md-4">
           <input type="date" class="form-control" [(ngModel)]="endDate" placeholder="Krajnji datum">
         </div>
-        <div class="col">
-          <button class="btn btn-primary" (click)="loadEarningsByDate()">Prikaži</button>
+        <div class="col-md-4">
+          <button class="btn btn-primary w-100" (click)="loadEarningsByDate()">Prikaži</button>
         </div>
       </div>
-      <p *ngIf="earnings !== null">Ukupna zarada hotela: {{ earnings | currency:'USD' }}</p>
-      <p *ngIf="earnings === null">Nema zarade za dat period.</p>
-    </div>
+      <div *ngIf="earnings !== null" class="text-center mt-4">
+        <p class="lead">Ukupna zarada hotela:</p>
+        <h1 class="display-3 text-success">{{ earnings | currency:'USD' }}</h1>
+      </div>
+      <p *ngIf="earnings === null" class="display-3 text-danger text-center mt-4">Nema zarade za dati period...</p>
     </div>
   </div>
+</div>

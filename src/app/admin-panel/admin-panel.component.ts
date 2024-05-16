@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ReceptionistService} from "./recepcionist.service";
 import {AdminService} from "./admin.service";
+import {PricingService} from "./pricing.service";
 
 @Component({
   selector: 'app-admin-panel',
@@ -22,11 +23,17 @@ export class AdminPanelComponent implements OnInit {
   startDate: string = '';
   endDate: string = '';
 
-  constructor(private receptionistService: ReceptionistService, private adminService: AdminService) { }
+  pricings: any[] = [];
+  newPricing: any = {
+    cenaPoNoci: null
+  };
+
+  constructor(private receptionistService: ReceptionistService, private adminService: AdminService,private pricingService: PricingService) { }
 
   ngOnInit(): void {
     this.loadReceptionists();
     this.loadEarnings();
+    this.loadPricings();
   }
 
   loadReceptionists(): void {
@@ -53,6 +60,45 @@ export class AdminPanelComponent implements OnInit {
         console.error('Failed to load earnings by date', error);
       });
     }
+  }
+
+  loadPricings(): void {
+    this.pricingService.getPricings().subscribe((data: any[]) => {
+      this.pricings = data;
+    }, error => {
+      console.error('Failed to load pricings', error);
+    });
+  }
+
+  savePricing(pricing: any): void {
+    this.pricingService.updatePricing(pricing).subscribe(() => {
+      alert('Pricing saved successfully');
+      this.loadPricings();
+    }, error => {
+      console.error('Failed to save pricing', error);
+      alert('Failed to save pricing');
+    });
+  }
+
+  addPricing(): void {
+    this.pricingService.addPricing(this.newPricing).subscribe((pricing: any) => {
+      this.pricings.push(pricing);
+      this.resetNewPricing();
+      alert('Pricing added successfully');
+    }, error => {
+      console.error('Failed to add pricing', error);
+      alert('Failed to add pricing');
+    });
+  }
+
+  deletePricing(id: number): void {
+    this.pricingService.deletePricing(id).subscribe(() => {
+      this.pricings = this.pricings.filter(pricing => pricing.id !== id);
+      alert('Pricing deleted successfully');
+    }, error => {
+      console.error('Failed to delete pricing', error);
+      alert('Failed to delete pricing');
+    });
   }
 
   saveReceptionist(receptionist: any): void {
@@ -137,6 +183,16 @@ export class AdminPanelComponent implements OnInit {
 
   isNewReceptionistValid(): boolean {
     return this.newReceptionist.ime && this.newReceptionist.prezime && this.newReceptionist.korisnickoIme && this.newReceptionist.lozinka;
+  }
+
+  resetNewPricing(): void {
+    this.newPricing = {
+      cenaPoNoci: null
+    };
+  }
+
+  isNewPricingValid(): boolean {
+    return this.newPricing.cenaPoNoci;
   }
 
 }

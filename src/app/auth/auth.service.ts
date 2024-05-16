@@ -5,6 +5,7 @@ import { map, catchError } from 'rxjs/operators';
 import {Router} from "@angular/router";
 import jwtDecode from 'jwt-decode';
 import { DecodedToken } from './decoded-token.model';
+import jwt_decode from "jwt-decode";
 
 
 @Injectable({
@@ -43,17 +44,22 @@ export class AuthService {
     const payload = this.getTokenPayload();
     return payload?.Role === 'ADMIN';
   }
-
+  getToken(): string | null {
+    return localStorage.getItem('Authorization');
+  }
 
   logout(): void {
     localStorage.removeItem('Authorization');
     this.router.navigate(['/login']);
   }
   isAuthenticated(): boolean {
-    const token = localStorage.getItem('Authorization');
-    return !!token;
+    const token = this.getToken();
+    if (token) {
+      const decodedToken: any = jwt_decode(token);
+      const expiryTime = decodedToken.exp * 30* 60 * 1000;
+      return Date.now() < expiryTime;
+    }
+    return false;
   }
-  getToken(): string | null {
-    return localStorage.getItem('Authorization');
-  }
+
 }

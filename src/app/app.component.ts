@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, Event as RouterEvent } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import {AuthService} from "./auth/auth.service";
 
 
 @Component({
@@ -13,9 +14,12 @@ export class AppComponent implements OnInit{
   showNavbar = true;
   showFooter = true;
 
-  constructor(private router: Router ) {}
+  constructor(private router: Router ,private authService: AuthService) {}
 
   ngOnInit(): void {
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['/login']);
+    }
     this.router.events.pipe(
       filter((event: RouterEvent): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
