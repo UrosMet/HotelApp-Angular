@@ -1,0 +1,52 @@
+<div class="container mt-5">
+  <h1 class="display-4">Dodaj Rezervaciju</h1>
+  <form (ngSubmit)="addReservation()">
+    <div class="mb-3">
+      <label for="guest" class="form-label">Gost</label>
+      <select id="guest" class="form-control" [(ngModel)]="reservation.idGosta.id" name="idGosta" required>
+        <option *ngFor="let guest of guests" [value]="guest.id">
+          {{ guest.ime }} {{ guest.prezime }}
+        </option>
+      </select>
+      <button class="btn btn-secondary mt-2" type="button" (click)="toggleAddGuest()">Dodaj novog gosta</button>
+      <div *ngIf="showAddGuestForm" class="card mt-3">
+        <div class="card-body">
+          <h5 class="card-title">Dodaj Novog Gosta</h5>
+          <div class="mb-3">
+            <label for="guestName" class="form-label">Ime</label>
+            <input type="text" class="form-control" id="guestName" [(ngModel)]="newGuest.ime" name="guestName" required>
+          </div>
+          <div class="mb-3">
+            <label for="guestSurname" class="form-label">Prezime</label>
+            <input type="text" class="form-control" id="guestSurname" [(ngModel)]="newGuest.prezime" name="guestSurname" required>
+          </div>
+          <div class="mb-3">
+            <label for="guestType" class="form-label">Tip Gosta</label>
+            <select class="form-control" id="guestType" [(ngModel)]="newGuest.tipGosta" name="guestType" required>
+              <option value="Regular">Regular</option>
+              <option value="VIP">VIP</option>
+            </select>
+          </div>
+          <button class="btn btn-success" type="button" (click)="addGuest()">Sačuvaj Gosta</button>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="room" class="form-label">Soba</label>
+      <select id="room" class="form-control" [(ngModel)]="reservation.idSobe.id" name="idSobe" required>
+        <option *ngFor="let room of rooms" [value]="room.id">
+          {{ room.tipKreveta }} - {{ room.cenovnik.cenaPoNoci }} USD
+        </option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="datumRezervacije" class="form-label">Datum Rezervacije</label>
+      <input type="date" class="form-control" id="datumRezervacije" [(ngModel)]="reservation.datumRezervacije" name="datumRezervacije" required>
+    </div>
+    <div class="mb-3">
+      <label for="duzinaBoravka" class="form-label">Dužina Boravka</label>
+      <input type="number" class="form-control" id="duzinaBoravka" [(ngModel)]="reservation.duzinaBoravka" name="duzinaBoravka" required>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!isFormValid()">Dodaj</button>
+  </form>
+</div>

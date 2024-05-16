@@ -22,6 +22,7 @@ import { GuestsComponent } from './guests/guests.component';
 import { TransportComponent } from './transport/transport.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { ReservationsComponent } from './reservations/reservations.component';
+import { AddReservationComponent } from './reservations/add-reservation/add-reservation.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ReservationsComponent } from './reservations/reservations.component';
     GuestsComponent,
     TransportComponent,
     AdminPanelComponent,
-    ReservationsComponent
+    ReservationsComponent,
+    AddReservationComponent
   ],
   imports: [
     BrowserModule,

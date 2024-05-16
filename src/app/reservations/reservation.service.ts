@@ -50,4 +50,13 @@ export class ReservationService {
   getReservationsByRoom(roomId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/rezervacija/soba/${roomId}`);
   }
+
+  addReservation(reservation: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/rezervacija`, reservation);
+  }
+
+  addGuest(guest: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/gost`, guest);
+  }
+
 }

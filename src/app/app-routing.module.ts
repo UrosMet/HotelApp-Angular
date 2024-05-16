@@ -14,6 +14,7 @@ import {GuestsComponent} from "./guests/guests.component";
 import {TransportComponent} from "./transport/transport.component";
 import {AdminPanelComponent} from "./admin-panel/admin-panel.component";
 import {ReservationsComponent} from "./reservations/reservations.component";
+import {AddReservationComponent} from "./reservations/add-reservation/add-reservation.component";
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'transport', component: TransportComponent, canActivate: [AuthGuard] },
   { path: 'admin-panel', component: AdminPanelComponent, canActivate: [AuthGuard,AdminGuard] },
   { path: 'reservations', component: ReservationsComponent, canActivate: [AuthGuard] },
+  { path: 'reservations/add-reservation', component: AddReservationComponent, canActivate: [AuthGuard] },
   { path: 'page-not-found', component: PageNotFoundComponent },
   { path: '**', redirectTo: '/page-not-found' }
 
