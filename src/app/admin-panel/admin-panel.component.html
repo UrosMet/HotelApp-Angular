@@ -56,7 +56,7 @@
           <td><input type="text" class="form-control" [(ngModel)]="receptionist.ime"></td>
           <td><input type="text" class="form-control" [(ngModel)]="receptionist.prezime"></td>
           <td><input type="text" class="form-control" [(ngModel)]="receptionist.korisnickoIme"></td>
-          <td><input type="password" class="form-control" [(ngModel)]="receptionist.lozinka"></td>
+          <td><input type="password" class="form-control" [(ngModel)]="receptionist.lozinka" placeholder="********"></td>
           <td>
             <select class="form-control" [(ngModel)]="receptionist.role">
               <option value="USER">USER</option>
@@ -70,7 +70,8 @@
           </td>
           <td>
             <button class="btn btn-primary" (click)="saveReceptionist(receptionist)">Sačuvaj</button>
-            <button class="btn btn-danger ms-2" (click)="deleteReceptionist(receptionist.id)">Obriši</button>
+
+            <button class="btn btn-danger mt-2" (click)="deleteReceptionist(receptionist.id)">Obriši</button>
           </td>
         </tr>
         </tbody>
